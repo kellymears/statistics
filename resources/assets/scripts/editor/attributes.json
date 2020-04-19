@@ -1,0 +1,13 @@
+{
+  "attributes": {
+    "stats": {
+      "type": "array",
+      "default": [
+        {
+          "Label": "12k",
+          "Figure": "Statistic"
+        }
+      ]
+    }
+  }
+}
