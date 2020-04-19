@@ -2,13 +2,12 @@
   "arrowParens": "avoid",
   "bracketSpacing": true,
   "tabWidth": 2,
-  "printWidth": 100,
+  "printWidth": 80,
   "singleQuote": true,
   "jsxBracketSameLine": true,
   "useTabs": false,
   "trailingComma": "all",
   "semi": false,
-  "parser": "babel",
   "overrides": [
     {
       "files": ["*.php"],

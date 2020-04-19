@@ -22,11 +22,11 @@ const save = ({ attributes: { stats } }) => {
     columns: () => {
       switch (stats.length) {
         case 2:
-          return `md:w-1/2`
+          return 'md:w-1/2'
         case 3:
-          return `md:w-1/3`
+          return 'md:w-1/3'
         case 4:
-          return `md:w-1/4`
+          return 'md:w-1/4'
         case 'default':
           return null
       }
@@ -41,13 +41,13 @@ const save = ({ attributes: { stats } }) => {
             {stats.map((stat, id) => (
               <div key={id} className={`p-4 ${classes.columns()}`}>
                 <RichText.Content
-                  tagName={`h2`}
-                  className={`font-medium sm:text-4xl text-3xl text-gray-900`}
+                  tagName={'h2'}
+                  className={'font-medium sm:text-4xl text-3xl text-gray-900'}
                   value={stat.figure}
                 />
                 <RichText.Content
-                  tagName={`p`}
-                  className={`leading-relaxed`}
+                  tagName={'p'}
+                  className={'leading-relaxed'}
                   value={stat.label}
                 />
               </div>

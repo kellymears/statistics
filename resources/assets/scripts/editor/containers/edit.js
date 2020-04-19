@@ -14,8 +14,8 @@ import PropTypes from 'prop-types'
  */
 const edit = ({ attributes, className, setAttributes }) => {
   const { stats } = attributes
-  const [ statHover, setStatHover ] = useState(
-    stats.map((stat, id) => ({ [id]: false }))
+  const [statHover, setStatHover] = useState(
+    stats.map((stat, id) => ({ [id]: false })),
   )
 
   /**
@@ -33,15 +33,12 @@ const edit = ({ attributes, className, setAttributes }) => {
     })
   }
 
-
   /**
    * Remove an item from the stats array
    */
   const removeStat = id => {
     setAttributes({
-      stats: stats.filter((stat, index) =>
-        index !== id
-      ),
+      stats: stats.filter((stat, index) => index !== id),
     })
   }
 
@@ -59,16 +56,12 @@ const edit = ({ attributes, className, setAttributes }) => {
     }
 
     setAttributes({
-      stats: [
-        ...stats.slice(0, id),
-        stat,
-        ...stats.slice(id + 1),
-      ],
+      stats: [...stats.slice(0, id), stat, ...stats.slice(id + 1)],
     })
   }
 
   /**
-   * classNames
+   * Class names
    * @see https://tailwindcss.com/docs/controlling-file-size/#writing-purgeable-html
    */
   const classes = {
