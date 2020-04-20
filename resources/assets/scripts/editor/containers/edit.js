@@ -1,6 +1,6 @@
 /** @wordpress */
 import { __ } from '@wordpress/i18n'
-import { useState } from '@wordpress/element'
+import { useState, useCallback } from '@wordpress/element'
 import { RichText } from '@wordpress/block-editor'
 import { Button } from '@wordpress/components'
 
@@ -15,7 +15,7 @@ import PropTypes from 'prop-types'
 const edit = ({ attributes, className, setAttributes }) => {
   const { stats } = attributes
   const [statHover, setStatHover] = useState(
-    stats.map((stat, id) => ({ [id]: false })),
+    useCallback(() => stats.map((stat, id) => ({ [id]: false })), []),
   )
 
   /**
@@ -77,8 +77,6 @@ const edit = ({ attributes, className, setAttributes }) => {
           return 'md:w-1/3'
         case 4:
           return 'md:w-1/4'
-        case 'default':
-          return null
       }
     },
   }
@@ -88,7 +86,7 @@ const edit = ({ attributes, className, setAttributes }) => {
    */
   return (
     <section className={className}>
-      <div className="text-gray-700 body-font">
+      <div className="text-gray-700">
         <div className="container px-5 py-24 mx-auto">
           <div className="flex flex-wrap -m-4 text-center">
             {stats.map((stat, id) => (
