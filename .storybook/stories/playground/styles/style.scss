@@ -1,0 +1,57 @@
+@import "./reset.scss";
+@import "./editor.scss";
+
+/**
+ * Playground styles
+ */
+.playground {
+	@include break-small() {
+		width: calc(100% - #{$sidebar-width});
+	}
+	padding-top: 20px;
+
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+
+	iframe {
+		width: 100%;
+	}
+
+	.components-navigate-regions {
+		height: 100%;
+	}
+}
+
+/**
+ * Playground sidebar
+ */
+.playground__sidebar {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: $sidebar-width;
+	border-left: $border-width solid $light-gray-500;
+	height: auto;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+	display: none;
+
+	@include break-small() {
+		display: block;
+	}
+}
+
+/**
+ * Animations
+ */
+@keyframes edit-post__fade-in-animation {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}

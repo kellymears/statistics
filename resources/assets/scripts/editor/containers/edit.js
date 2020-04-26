@@ -1,4 +1,6 @@
 /** @wordpress */
+import React from 'react'
+
 import { __ } from '@wordpress/i18n'
 import { useState, useCallback } from '@wordpress/element'
 import { RichText } from '@wordpress/block-editor'

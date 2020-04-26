@@ -1,4 +1,4 @@
-const { resolve } = require('path')
+const {resolve} = require('path')
 const DependencyExtractionWebpackPlugin = require('@wordpress/dependency-extraction-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const LiveReloadPlugin = require('webpack-livereload-plugin')
@@ -51,6 +51,7 @@ module.exports = {
             loader: 'postcss-loader',
             options: {
               sourceMap: true,
+              parser: 'postcss-scss',
             },
           },
         ],

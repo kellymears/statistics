@@ -1,5 +1,7 @@
 module.exports = {
+  syntax: require('postcss-scss'),
   plugins: [
+    require('postcss-strip-inline-comments'),
     require('postcss-import'),
     require('tailwindcss'),
     require('autoprefixer'),
