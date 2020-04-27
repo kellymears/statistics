@@ -12,28 +12,6 @@ module.exports = {
 		'@storybook/addon-a11y',
   ],
   webpackFinal: async config => {
-    config.module.rules.push({
-      test: /\.scss$/,
-      use: [
-        { loader: 'style-loader' },
-        {
-          loader: 'css-loader',
-          options: {
-            sourceMap: true,
-            modules: true,
-          },
-        },
-        {
-          loader: 'postcss-loader',
-          options: {
-            sourceMap: true,
-            config: {
-              path: 'postcss.config.js',
-            }
-          }
-        },
-      ],
-    })
     return config;
   },
 }
