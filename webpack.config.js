@@ -58,10 +58,10 @@ module.exports = {
         test: /\.css$/,
         use: [
           {
-						loader: 'file-loader',
-						options: {
-							name: '[name].css',
-						},
+            loader: 'file-loader',
+            options: {
+              name: '[name].css',
+            },
           },
           { loader: 'extract-loader' },
           { loader: 'css-loader' },
