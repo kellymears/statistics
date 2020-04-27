@@ -1,8 +1,9 @@
 const {resolve} = require('path')
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const DependencyExtractionWebpackPlugin = require('@wordpress/dependency-extraction-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
-const LiveReloadPlugin = require('webpack-livereload-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const ManifestPlugin = require('webpack-manifest-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const WebpackBar = require('webpackbar')
 
@@ -15,45 +16,56 @@ const isProduction = process.env.NODE_ENV === 'production'
  * Webpack Configuration
  */
 module.exports = {
+  mode: isProduction ? 'production' : 'development',
+  devtool: 'inline-source-map',
   entry: {
-    editor: resolve(__dirname, 'resources/assets/scripts/editor/block.js'),
-    public: resolve(__dirname, 'resources/assets/scripts/public/index.js'),
+    ['editor']: [
+      resolve(__dirname, 'resources/assets/scripts/editor/block.js'),
+      resolve(__dirname, 'resources/assets/styles/editor.css'),
+    ],
+    ['public']: [
+      resolve(__dirname, 'resources/assets/scripts/public/index.js'),
+      resolve(__dirname, 'resources/assets/styles/public.css'),
+    ],
   },
   output: {
     path: resolve(__dirname, 'dist'),
   },
   resolve: {
-    extensions: ['.js', '.json', '.jsx', '.css'],
+    extensions: ['.js', '.json', '.css'],
     modules: [resolve(__dirname, 'node_modules')],
   },
   optimization: {
-    minimizer: [new UglifyJsPlugin()],
+    minimizer: isProduction ? [new UglifyJsPlugin()] : [],
+  },
+  stats: {
+    all: false,
+    assets: true,
+    errors: true,
+    timings: true,
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.js$/,
         exclude: resolve(__dirname, 'node_modules'),
-        loaders: ['babel-loader', 'eslint-loader'],
+        loaders: [
+          'babel-loader',
+          'eslint-loader',
+        ],
       },
       {
         test: /\.css$/,
         use: [
-          { loader: MiniCssExtractPlugin.loader },
           {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true,
-              url: false,
-            },
+						loader: 'file-loader',
+						options: {
+							name: '[name].css',
+						},
           },
-          {
-            loader: 'postcss-loader',
-            options: {
-              sourceMap: true,
-              parser: 'postcss-scss',
-            },
-          },
+          { loader: 'extract-loader' },
+          { loader: 'css-loader' },
+          { loader: 'postcss-loader' },
         ],
       },
       {
@@ -67,19 +79,35 @@ module.exports = {
     ],
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new DependencyExtractionWebpackPlugin({
       injectPolyfill: false,
       useDefaults: true,
       outputFormat: 'json',
     }),
-    new LiveReloadPlugin({
-      port: 3000,
-    }),
-    new MiniCssExtractPlugin({
-      chunkFilename: '[id].css',
-    }),
     new FriendlyErrorsWebpackPlugin(),
+    new ManifestPlugin({
+      output: {
+        publicPath: resolve(__dirname, 'dist'),
+      },
+    }),
     new WebpackBar(),
+    ...(! isProduction
+      ? [
+        new BrowserSyncPlugin({
+          host: 'localhost',
+          port: 3000,
+          files: [{
+            match: [
+              './dist/*.js',
+              './dist/*.css',
+            ],
+          }],
+        }, {
+          reload: false,
+        }),
+      ]
+      : [/** dev only plugins */]
+    ),
   ],
-  stats: 'errors-only',
 }

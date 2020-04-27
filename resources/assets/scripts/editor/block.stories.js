@@ -1,9 +1,9 @@
 /** @storybook */
 import React from 'react'
-import {withKnobs, text} from '@storybook/addon-knobs'
+import { withKnobs, text } from '@storybook/addon-knobs'
 
 /** Components */
-import {edit as Statistics} from './containers/edit';
+import { edit as Statistics } from './containers/edit'
 import EditorPreview from '../../../../.storybook/stories/playground'
 
 /** Styles */
@@ -20,7 +20,7 @@ export default {
 /**
  * Block Preview
  */
-export const Editor = () =>
+export const Editor = () => (
   <EditorPreview>
     <Statistics
       className="wp-block-tiny-pixel-statistics"
@@ -47,11 +47,12 @@ export const Editor = () =>
       }}
     />
   </EditorPreview>
+)
 
 /**
  * Theme Preview
  */
-export const Theme = () =>
+export const Theme = () => (
   <Statistics
     className="wp-block-tiny-pixel-statistics"
     setAttributes={() => null}
@@ -76,3 +77,4 @@ export const Theme = () =>
       ],
     }}
   />
+)

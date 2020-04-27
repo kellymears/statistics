@@ -2,9 +2,6 @@
 import { __ } from '@wordpress/i18n'
 import { registerBlockType } from '@wordpress/blocks'
 
-/** styles */
-import './../../styles/tailwind.css'
-
 /** tiny-pixel/statistics components */
 import { edit } from './containers/edit'
 import { save } from './containers/save'

@@ -39,10 +39,9 @@ module.exports = {
     'no-console': 0,
     'no-unused-vars': 'warn',
     'jsx-a11y/alt-text': 'warn',
-    'react/prop-types': 'warn',
+    'react/prop-types': 0,
     'react/react-in-jsx-scope': 0,
     'react-hooks/rules-of-hooks': 'warn',
-    'react-hooks/exhaustive-deps': 'warn',
     quotes: [
       'error',
       'single',

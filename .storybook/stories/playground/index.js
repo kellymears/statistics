@@ -27,9 +27,9 @@ export default ({children}) => {
 			<SlotFillProvider>
 				<DropZoneProvider>
 					<BlockEditorProvider
-						value={ blocks }
-						onInput={ updateBlocks }
-						onChange={ updateBlocks }>
+						value={blocks}
+						onInput={updateBlocks}
+						onChange={updateBlocks}>
 						<div className="editor-styles-wrapper">
 							<Popover.Slot name="block-toolbar" />
 							<BlockEditorKeyboardShortcuts />
